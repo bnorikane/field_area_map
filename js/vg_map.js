@@ -32,7 +32,7 @@ const pctLayer = L.geoJSON(pct_data, {
 function pctStyle(feature) {
   return {
     fill: true,
-    fillOpacity: 0.2,
+    fillOpacity: 0.0,
     fillColor: pctFillColor(feature),
     color: "red",
     weight: 1,
