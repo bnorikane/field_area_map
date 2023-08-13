@@ -23,6 +23,7 @@ const osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 ////////////////     ADD precincts GEOJSON LAYER TO MAP
 
+// pct_data.js explicitly defines the pct geojson object
 const pctLayer = L.geoJSON(pct_data, {
   style: pctStyle,
   onEachFeature: onEachFeature,
@@ -132,7 +133,7 @@ function selectPct(e) {
   displayPctInfo(e);
 }
 
-// BCDP Field Areas Layer
+////////////////////   ADD BCDP Field Areas Layer   /////////////////////////////
 
 // function getAreaColor(area) {
 //   areaColor = {
@@ -186,10 +187,18 @@ function areaStyle(feature) {
 const areaLayer = L.geoJSON(areas_data, {
   style: areaStyle,
 });
+
+////////////////////     ADD Supersite layer to map   //////////////////////
+// Create Supersite layer by reading ss_info.geojson file
+const supersiteLayer = L.geoJSON(ss_data, {
+  style: areaStyle,
+});
+
 areaLayer.addTo(map);
 
 pctLayer.addTo(map);
 
+supersiteLayer.addTo(map);
 ////////////////////     ADD UI CONTROLS   /////////////////////
 
 // Layers Control
@@ -201,6 +210,7 @@ const baseMaps = {
 const overlayMaps = {
   Precinct: pctLayer,
   "BCDP Field Areas": areaLayer,
+  Supersites: supersiteLayer,
 };
 
 // Add layerControl
