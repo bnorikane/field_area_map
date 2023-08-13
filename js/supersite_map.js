@@ -2,14 +2,21 @@
  - Bruce Norikane
  - August 13, 2023
  
- bcdp_field_map.js creates a Leaflet web map
+ supersite_map.js creates a Leaflet web map
 
  Features:
  - Boulder County election districts
     - County, CD, SD, HD, precincts
-- Boulder County Democratic Party Field Team defined Areas 
+ - Boulder County Democratic Party Field Team defined Areas 
+ - Caucus Supersites
+    - Candidate sites and committed sites
 
-
+ To Do
+ - add tooltip with ss_info
+ - change ss marker icon to show status
+ - add ss_imfo to info box
+ - display Supersite in precinct info box when precinct is selected
+ - add Supersite to precinct tooltip
 **************************************************** */
 
 //////////////   CREATE MAP OBJECT   //////////////
@@ -45,7 +52,7 @@ const pctLayer = L.geoJSON(pct_data, {
 function pctStyle(feature) {
   return {
     fill: true,
-    fillOpacity: 0.0,
+    fillOpacity: 0.0, // do not show any fill color
     fillColor: pctFillColor(feature),
     color: "red",
     weight: 1,
@@ -53,6 +60,7 @@ function pctStyle(feature) {
   };
 }
 
+// Add precinct fill color for Voter Guide Delivery status
 function pctFillColor(feature) {
   switch (feature.properties.rural) {
     case "Unknown":

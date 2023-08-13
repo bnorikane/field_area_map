@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>circle marker test Map</title>
+
+    <link rel="icon" type="image/x-icon" href="/img/BCDP-logo.png" />
+
+    <!-----    LEAFLET LINKS    ----------------------------->
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
+
+    <!-----    PLUGINS     ---------------------------------->
+
+    <!-----    STYLES      ---------------------------------->
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="grid">
+      <aside id="side-bar" class="sidebar">
+        <div>
+          <h2>BCDP</h2>
+          <h3 class="sb-help">click on precinct</h3>
+        </div>
+        <div class="vg-container">
+          <h4 class="vg-info">Area: <span id="area"></span></h4>
+          <h4 class="vg-info">Precinct: <span id="pct_num"></span></h4>
+          <h4 class="vg-info">
+            Voter Guide delivery: <span id="mountains"></span>
+          </h4>
+        </div>
+      </aside>
+      <main id="map" class="map"></main>
+    </div>
+
+    <!-----    MAP SCRIPT    -------------------------------->
+
+    <!-- Defines ss_data JSON Layer -->
+    <script type="text/javascript" src="data/ss_data.js"></script>
+
+    <!-- /////////    MAIN JAVASCRIPT CODE     //////// -->
+    <script type="text/javascript" src="js/circle_marker_test.js"></script>
+  </body>
+</html>
