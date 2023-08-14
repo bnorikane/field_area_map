@@ -12,14 +12,19 @@
     - Candidate sites and committed sites
   - tooltip with ss_info
   - ss marker shows selected status
+ - attribution control
 
  To Do
+ - add legend
+ - add logo to map
+ - add icon for browser tab
  - update pct_data to include ss_name
   - SuperSite_precinct_selection.xlsx: export csv with ss_name column for each precinct
   - supersite_pct.ipynb
  - add ss_imfo to info box
  - display Supersite in precinct info box when precinct is selected
  - add Supersite to precinct tooltip
+ - truncate latlng to 5 digits
 **************************************************** */
 
 //////////////   CREATE MAP OBJECT   //////////////
@@ -227,16 +232,16 @@ const supersiteLayer = L.geoJSON(ss_data, {
   .addTo(map);
 
 // set all Supersites to single style
-function ssStyle(feature) {
-  return {
-    fill: true,
-    fillOpacity: 0.0,
-    fillColor: "blue",
-    color: "purple",
-    weight: 2,
-    opacity: 1,
-  };
-}
+// function ssStyle(feature) {
+//   return {
+//     fill: true,
+//     fillOpacity: 0.0,
+//     fillColor: "blue",
+//     color: "purple",
+//     weight: 2,
+//     opacity: 1,
+//   };
+// }
 
 function returnSSMarker(json, latlng) {
   var att = json.properties;
@@ -263,11 +268,13 @@ const overlayMaps = {
 };
 
 // Add layerControl
-const layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+const layerControl = L.control
+  .layers(baseMaps, overlayMaps, { position: "topleft", collapsed: false })
+  .addTo(map);
 
 // Legend Control
 
-const legend = L.control({ position: "bottomright" });
+const legend = L.control({ position: "topleft" });
 
 legend.onAdd = function (map) {
   const lg_div = L.DomUtil.create("div", "info legend");

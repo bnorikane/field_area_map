@@ -51,7 +51,7 @@ body {
 
 .map {
   width: 100%;
-  height: 100vh;
+  height: 85vh;
   font-size: 1.4rem;
 }
 
@@ -85,7 +85,7 @@ p {
   color: #228ae6;
 }
 
-.vg-container {
+.info-container {
   display: flex;
   background-color: #116ac6;
   border-radius: 1rem;
@@ -108,7 +108,7 @@ p {
   display: none;
 }
 
-.vg-info {
+.map-info {
   /* padding: 0 0 0 2rem; */
   margin: 0.5rem 0 0 2rem;
 }
