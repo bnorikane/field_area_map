@@ -47,6 +47,7 @@ const pctLayer = L.geoJSON(pct_data, {
   style: pctStyle,
   onEachFeature: onEachFeature,
 });
+pctLayer.addTo(map);
 
 // set all precincts to single style
 function pctStyle(feature) {
@@ -208,17 +209,42 @@ const areaLayer = L.geoJSON(areas_data, {
   style: areaStyle,
 });
 
-////////////////////     ADD Supersite layer to map   //////////////////////
-// Create Supersite layer by reading ss_info.geojson file
-const supersiteLayer = L.geoJSON(ss_data, {
-  style: areaStyle,
-});
-
 areaLayer.addTo(map);
 
-pctLayer.addTo(map);
+////////////////////     ADD Supersite layer to map   //////////////////////
+// Create Supersite layer by reading ss_info.geojson file
 
-supersiteLayer.addTo(map);
+const supersiteLayer = L.geoJSON(ss_data, {
+  pointToLayer: returnSSMarker,
+  // style: ssStyle,
+})
+  .bindTooltip(function (layer) {
+    return layer.feature.properties.Venue;
+  })
+  .addTo(map);
+
+// set all Supersites to single style
+function ssStyle(feature) {
+  return {
+    fill: true,
+    fillOpacity: 0.0,
+    fillColor: "blue",
+    color: "purple",
+    weight: 2,
+    opacity: 1,
+  };
+}
+
+function returnSSMarker(json, latlng) {
+  var att = json.properties;
+  if (att.Selected == "Yes") {
+    var ss_color = "purple";
+  } else {
+    var ss_color = "grey";
+  }
+  return L.circleMarker(latlng, { radius: 10, color: ss_color });
+}
+
 ////////////////////     ADD UI CONTROLS   /////////////////////
 
 // Layers Control
@@ -262,3 +288,13 @@ legend.onAdd = function (map) {
 };
 
 legend.addTo(map);
+
+/*     ///////////////////////////   code from Udemy Leaflet course   ///////////////////
+
+// truncate latlng to 5 digits
+function LatLngToArrayString(ll) {
+  // console.log(ll);
+  return "["+ll.lat.toFixed(5)+", "+ll.lng.toFixed(5)+"]";
+};
+
+*/ ////////////////////////////////////////////////////////////////////////////////////////

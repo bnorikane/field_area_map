@@ -31,6 +31,15 @@ const osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 ////////////////////     ADD Supersite layer to map   //////////////////////
 // Create Supersite layer by reading ss_info.geojson file
 
+const supersiteLayer = L.geoJSON(ss_data, {
+  pointToLayer: returnSSMarker,
+  style: ssStyle,
+})
+  .bindTooltip(function (layer) {
+    return layer.feature.properties.Venue;
+  })
+  .addTo(map);
+
 // set all Supersites to single style
 function ssStyle(feature) {
   return {
@@ -44,11 +53,5 @@ function ssStyle(feature) {
 }
 
 function returnSSMarker(json, latlng) {
-  return L.circleMarker(latlng, { radius: 5, color: "red" });
+  return L.circleMarker(latlng, { radius: 10, color: "red" });
 }
-
-const supersiteLayer = L.geoJSON(ss_data, {
-  pointToLayer: returnSSMarker,
-  style: ssStyle,
-});
-supersiteLayer.addTo(map);
