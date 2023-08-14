@@ -10,10 +10,13 @@
  - Boulder County Democratic Party Field Team defined Areas 
  - Caucus Supersites
     - Candidate sites and committed sites
+  - tooltip with ss_info
+  - ss marker shows selected status
 
  To Do
- - add tooltip with ss_info
- - change ss marker icon to show status
+ - update pct_data to include ss_name
+  - SuperSite_precinct_selection.xlsx: export csv with ss_name column for each precinct
+  - supersite_pct.ipynb
  - add ss_imfo to info box
  - display Supersite in precinct info box when precinct is selected
  - add Supersite to precinct tooltip
@@ -94,12 +97,12 @@ function onEachFeature(feature, layer) {
   // Add tooltip to each precinct with Precinct and Area
   // const tooltipContent = "<b>" + feature.properties.precinct + "</b>";
   const tooltipContent =
-    "<b>Area: " +
-    feature.properties.area_short +
-    "<br >PCT: " +
+    "<b>PCT: " +
     feature.properties.precinct +
-    "<br >VG: " +
-    feature.properties.mail +
+    "<br >Area: " +
+    feature.properties.area_short +
+    // "<br >Supersite: " +
+    // feature.properties.mail +
     "</b>";
 
   layer.bindTooltip(tooltipContent, {
