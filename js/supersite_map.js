@@ -13,10 +13,15 @@
   - tooltip with ss_info
   - ss marker shows selected status
  - attribution control
+ - BCDP logo
 
  To Do
+ - fix z-order (top to bottom)
+  - Supersite
+  - Precinct
+  - Area
+  - Base Map
  - add legend
- - add logo to map
  - add icon for browser tab
  - update pct_data to include ss_name
   - SuperSite_precinct_selection.xlsx: export csv with ss_name column for each precinct
