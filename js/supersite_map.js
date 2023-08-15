@@ -284,21 +284,17 @@ const legend = L.control({ position: "topleft" });
 
 legend.onAdd = function (map) {
   const lg_div = L.DomUtil.create("div", "info legend");
-  // var grades = [0, 10, 20, 50, 100, 200, 500, 1000];
-  // var labels = [];
-  // var from, to;
 
-  // //generate a label with colored square for each density grade
-  // for (var i = 0; i < grades.length; i++) {
-  //   div.innerHTML +=
-  //     '<i style="background:' +
-  //     getColor(grades[i] + 1) +
-  //     '"></i> ' +
-  //     grades[i] +
-  //     (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
-  // }
+  // Create html to show legend text
   lg_div.innerHTML = "<h4>Legend</h4>";
-  lg_div.innerHTML += '<i style="background: red"></i>';
+  lg_div.innerHTML +=
+    '<i style="background: purple; border-radius: 20px"></i><span>Supersite 2024</span></br>';
+  lg_div.innerHTML +=
+    '<i style="background: grey; border-radius: 20px"></i><span>Site Candidate</span></br>';
+  lg_div.innerHTML +=
+    '<i style="background: black; height: 5px"></i><span>Area</span></br>';
+  lg_div.innerHTML +=
+    '<i style="background: red; height: 2px"></i><span>Precinct</span></br>';
 
   return lg_div;
 };

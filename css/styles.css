@@ -124,7 +124,13 @@ p {
 }
 
 .legend {
-  line-height: 18px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0.5em;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  line-height: 24px;
   color: #555;
 }
 .legend i {
@@ -135,6 +141,10 @@ p {
   opacity: 0.7;
   /* border: 2px solid red; */
 }
+/* #ss24 {
+  border-radius: 50px;
+  border: 2px, solid, black;
+} */
 
 .btn {
   display: inline-block;
