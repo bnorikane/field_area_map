@@ -16,7 +16,8 @@
  - BCDP logo
 
  To Do
- - fix z-order (top to bottom)
+ - fix cursor hover
+  - problem: after turning precinct layer off and on, cannot get tooltip for supersite
   - Supersite
   - Precinct
   - Area
