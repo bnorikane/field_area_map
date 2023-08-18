@@ -14,16 +14,18 @@
   - ss marker shows selected status
  - attribution control
  - BCDP logo
+ - legend
 
  To Do
+ - Refactor supersite update process to automate updates
+  - 1 Refactor geojson file reads to AJAX instead of JSON embedded in .js files. e.g. areas_data.js
+  - 2 refactor input files into GeoPackage file (SQLite)  
+        and read data using Leaflet GeoPackage plugin
  - fix cursor hover
   - problem: after turning precinct layer off and on, cannot get tooltip for supersite
-  - Supersite
-  - Precinct
-  - Area
-  - Base Map
- - add legend
- - add icon for browser tab
+  - need to improve event bubbling between layers
+ - minor - improve legend graphics
+ - minor debug icon for browser tab on Github page
  - update pct_data to include ss_name
   - SuperSite_precinct_selection.xlsx: export csv with ss_name column for each precinct
   - supersite_pct.ipynb
