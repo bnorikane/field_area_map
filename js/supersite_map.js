@@ -181,8 +181,8 @@ function displayPctInfo(e) {
     e.target.feature.properties.area_long;
 
   // set mail status by mountains property
-  document.getElementById("mountains").innerHTML =
-    e.target.feature.properties.mail;
+  // document.getElementById("mountains").innerHTML =
+  // e.target.feature.properties.mail;
 }
 
 // mouseout event handler
