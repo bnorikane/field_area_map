@@ -54,7 +54,10 @@
 
 *********************************************************************** */
 
-//////////////   CREATE MAP OBJECT   //////////////
+//////////////////////////////////////////////////////////////////
+////////        CREATE MAP OBJECT        ///////////////////
+//////////////////////////////////////////////////////////////////
+
 // Set map options
 // center map in Boulder County
 const boulderLatlng = [40.08, -105.35];
@@ -68,7 +71,11 @@ let options = {
 // Create Map object in #map container
 const map = L.map("map", options);
 
-/////////////////      BASEMAP LAYER      //////////
+////////////////////////////////////////////////////////////////////
+////////        ADD MAP LAYERS                 ////////////////////
+////////////////////////////////////////////////////////////////////
+
+////////////////        BASEMAP LAYER             ////////////////////
 
 const osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
@@ -76,10 +83,10 @@ const osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '&copy; BCDP &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-////////////////     PRECINCTS LAYER      ////////////
+////////////////        PRECINCTS LAYER       ///////////////////
 
 // pct_data.js
-const pctLayer = L.geoJSON(pct_data, {
+const pctLayer = new L.GeoJSON.AJAX("data/pct_area_boulder.geojson", {
   style: pctStyle,
   onEachFeature: onEachFeature,
 });
@@ -190,7 +197,7 @@ function selectPct(e) {
   displayPctInfo(e);
 }
 
-////////////////////      AREAS LAYER     /////////////////////////////
+////////////////        AREAS LAYER     /////////////////////////////
 
 function areaStyle(feature) {
   return {
@@ -207,7 +214,7 @@ const areaLayer = new L.GeoJSON.AJAX("data/areas.geojson", {
   style: areaStyle,
 }).addTo(map);
 
-////////////////////     SUPERSITE LAYER     //////////////////////
+////////////////        SUPERSITE LAYER        //////////////////////
 
 // Create Supersite layer by reading ss_info.geojson file
 const supersiteLayer = new L.GeoJSON.AJAX("data/ss_info.geojson", {
@@ -231,7 +238,7 @@ function returnSSMarker(json, latlng) {
   return L.circleMarker(latlng, { radius: 10, color: ss_color });
 }
 
-////////////////////      BOULDER COUNTY LAYER   ////////////////////
+////////////////        BOULDER COUNTY LAYER   ////////////////////
 
 function countyStyle(feature) {
   return {
@@ -244,9 +251,11 @@ const countyLayer = new L.GeoJSON.AJAX("data/County_Boundary.geojson", {
   style: countyStyle,
 });
 
-////////////////////     ADD UI CONTROLS   /////////////////////
+////////////////////////////////////////////////////////////////////
+////////        ADD UI CONTROLS                /////////////////////
+////////////////////////////////////////////////////////////////////
 
-// Layers Control
+////////////////        LAYERS CONTROL           ///////////////////
 
 const baseMaps = {
   OpenStreetMaps: osm,
@@ -263,7 +272,7 @@ const layerControl = L.control
   .layers(baseMaps, overlayMaps, { position: "topleft", collapsed: false })
   .addTo(map);
 
-// Legend Control
+////////////////        LEGEND CONTROL           /////////////////////
 
 const legend = L.control({ position: "topleft" });
 
@@ -286,7 +295,7 @@ legend.onAdd = function (map) {
 
 legend.addTo(map);
 
-/*     ///////////////////////////   code from Udemy Leaflet course   ///////////////////
+/*     //////////////    code from Udemy Leaflet course    //////////
 
 // truncate latlng to 5 digits
 function LatLngToArrayString(ll) {
@@ -294,4 +303,4 @@ function LatLngToArrayString(ll) {
   return "["+ll.lat.toFixed(5)+", "+ll.lng.toFixed(5)+"]";
 };
 
-*/ ////////////////////////////////////////////////////////////////////////////////////////
+*/ //////////////////////////////////////////////////////////////////
