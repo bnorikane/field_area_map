@@ -1,8 +1,11 @@
-/********************    bcdp_field_map.js     
+/********************    
+ 
+<<<<<<<<<<<<<<<<<    bcdp_field_map.js     >>>>>>>>>>>>>>>>>>>>>>>>>>
+
  - Bruce Norikane
  - August 13, 2023
  
- supersite_map.js creates a Leaflet web map
+ supersite_map.js creates a Leaflet web map that shows Boulder Caucus Supersites
 
  Features:
  - Boulder County election districts
@@ -19,7 +22,19 @@
  - BCDP logo
  - legend
 
- To Do
+ <<<<<<<<<<<<<<<<<< ISSUES
+ 
+ ERROR - Area boundaries not shown on map
+ Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')
+    at displayPctInfo (supersite_map.js:160:50)
+
+ line 160:
+  document.getElementById("mountains").innerHTML =
+    e.target.feature.properties.mail;
+
+
+ <<<<<<<<<<<<<<<<<<    TO DO   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
  - Refactor supersite update process to automate updates
   - 1 Refactor geojson file reads to AJAX instead of JSON embedded in .js files. e.g. areas_data.js
   - 2 refactor input files into GeoPackage file (SQLite)  
@@ -36,7 +51,8 @@
  - display Supersite in precinct info box when precinct is selected
  - add Supersite to precinct tooltip
  - truncate latlng to 5 digits
-**************************************************** */
+
+*********************************************************************** */
 
 //////////////   CREATE MAP OBJECT   //////////////
 // Set map options
@@ -224,7 +240,7 @@ function areaStyle(feature) {
 // Create areaLayer by reading area data in geojson file
 //    Do not automatically display areaLayer
 //    User can interactively display Areas using LayerControl
-const areaLayer = L.geoJSON(areas_data, {
+const areaLayer = new L.GeoJSON.AJAX("data/areas_data.geojson", {
   style: areaStyle,
 });
 
