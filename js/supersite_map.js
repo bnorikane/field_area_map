@@ -230,10 +230,16 @@ areaLayer.addTo(map);
 ////////////////////     ADD Supersite layer to map   //////////////////////
 // Create Supersite layer by reading ss_info.geojson file
 
-const supersiteLayer = L.geoJSON(ss_data, {
+// const supersiteLayer = new L.GeoJSON.AJAX("data/ss_info.geojson");
+
+// supersiteLayer.addTo(map);
+
+const supersiteLayer = new L.GeoJSON.AJAX("data/ss_info.geojson", {
   pointToLayer: returnSSMarker,
   // style: ssStyle,
-})
+});
+
+supersiteLayer
   .bindTooltip(function (layer) {
     return layer.feature.properties.Venue;
   })
@@ -260,6 +266,20 @@ function returnSSMarker(json, latlng) {
   }
   return L.circleMarker(latlng, { radius: 10, color: ss_color });
 }
+// use leaflet-AJAX plugin
+
+// Boulder County layer
+
+function countyStyle(feature) {
+  return {
+    color: "black",
+    weight: 7,
+    fillOpacity: 0.0,
+  };
+}
+const countyLayer = new L.GeoJSON.AJAX("data/County_Boundary.geojson", {
+  style: countyStyle,
+});
 
 ////////////////////     ADD UI CONTROLS   /////////////////////
 
