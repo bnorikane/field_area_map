@@ -6,10 +6,13 @@
 
  Features:
  - Boulder County election districts
-    - County, CD, SD, HD, precincts
- - Boulder County Democratic Party Field Team defined Areas 
+  - 2023 precincts
+  - County
+ - Boulder County Democratic Party Field Team defined 
+  - Areas 
  - Caucus Supersites
-    - Candidate sites and committed sites
+    - selected sites
+    - unselected backup sites
   - tooltip with ss_info
   - ss marker shows selected status
  - attribution control
@@ -229,10 +232,6 @@ areaLayer.addTo(map);
 
 ////////////////////     ADD Supersite layer to map   //////////////////////
 // Create Supersite layer by reading ss_info.geojson file
-
-// const supersiteLayer = new L.GeoJSON.AJAX("data/ss_info.geojson");
-
-// supersiteLayer.addTo(map);
 
 const supersiteLayer = new L.GeoJSON.AJAX("data/ss_info.geojson", {
   pointToLayer: returnSSMarker,
