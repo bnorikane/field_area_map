@@ -68,16 +68,17 @@ let options = {
 // Create Map object in #map container
 const map = L.map("map", options);
 
-/////////////////    ADD BASEMAP LAYER TO MAP   //////////
+/////////////////      BASEMAP LAYER      //////////
+
 const osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution:
     '&copy; BCDP &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-////////////////     ADD precincts GEOJSON LAYER TO MAP
+////////////////     PRECINCTS LAYER      ////////////
 
-// pct_data.js explicitly defines the pct geojson object
+// pct_data.js
 const pctLayer = L.geoJSON(pct_data, {
   style: pctStyle,
   onEachFeature: onEachFeature,
@@ -189,66 +190,26 @@ function selectPct(e) {
   displayPctInfo(e);
 }
 
-////////////////////   ADD BCDP Field Areas Layer   /////////////////////////////
-
-// function getAreaColor(area) {
-//   areaColor = {
-//     "BO-01": "red",
-//     "BO-02": "green",
-//     "BO-03": "blue",
-//     "BO-04": "yellow",
-//     "BO-05": "magenta",
-//     "BO-06": "cyan",
-//     "BO-07": "orange",
-//     "BO-08": "purple",
-//     "BO-09": "pink",
-//     "BO-10": "olive",
-//     "BO-11": "maroon",
-//     "ER-01": "red",
-//     "GN-01": "green",
-//     "LF-01": "blue",
-//     "LF-02": "yellow",
-//     "LM-01": "red",
-//     "LM-02": "green",
-//     "LM-03": "blue",
-//     "LM-04": "cyan",
-//     "LM-05": "magenta",
-//     "LM-06": "cyan",
-//     "LM-07": "orange",
-//     "LV-01": "magenta",
-//     "LV-02": "cyan",
-//     "MT-01": "yellow",
-//     "MT-02": "magenta",
-//     "MT-03": "yellow",
-//     "SU-01": "red",
-//   };
-
-//   return areaColor[area];
-// }
+////////////////////      AREAS LAYER     /////////////////////////////
 
 function areaStyle(feature) {
   return {
     fill: false,
     weight: 6,
     opacity: 0.7,
-    // color: getAreaColor(feature.properties.Area_Short),
     color: "black",
     fillOpacity: 0.2,
   };
 }
 
-// Create areaLayer by reading area data in geojson file
-//    Do not automatically display areaLayer
-//    User can interactively display Areas using LayerControl
-const areaLayer = new L.GeoJSON.AJAX("data/areas_data.geojson", {
+// Read Area data from geojson file and create Leaflet GeoJSON layer and add to map
+const areaLayer = new L.GeoJSON.AJAX("data/areas.geojson", {
   style: areaStyle,
-});
+}).addTo(map);
 
-areaLayer.addTo(map);
+////////////////////     SUPERSITE LAYER     //////////////////////
 
-////////////////////     ADD Supersite layer to map   //////////////////////
 // Create Supersite layer by reading ss_info.geojson file
-
 const supersiteLayer = new L.GeoJSON.AJAX("data/ss_info.geojson", {
   pointToLayer: returnSSMarker,
   // style: ssStyle,
@@ -260,18 +221,6 @@ supersiteLayer
   })
   .addTo(map);
 
-// set all Supersites to single style
-// function ssStyle(feature) {
-//   return {
-//     fill: true,
-//     fillOpacity: 0.0,
-//     fillColor: "blue",
-//     color: "purple",
-//     weight: 2,
-//     opacity: 1,
-//   };
-// }
-
 function returnSSMarker(json, latlng) {
   var att = json.properties;
   if (att.Selected == "Yes") {
@@ -281,9 +230,8 @@ function returnSSMarker(json, latlng) {
   }
   return L.circleMarker(latlng, { radius: 10, color: ss_color });
 }
-// use leaflet-AJAX plugin
 
-// Boulder County layer
+////////////////////      BOULDER COUNTY LAYER   ////////////////////
 
 function countyStyle(feature) {
   return {
