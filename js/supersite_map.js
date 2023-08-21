@@ -23,20 +23,13 @@
  - legend
 
  <<<<<<<<<<<<<<<<<< ISSUES
- 
- ERROR - Area boundaries not shown on map
- Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')
-    at displayPctInfo (supersite_map.js:160:50)
-
- line 160:
-  document.getElementById("mountains").innerHTML =
-    e.target.feature.properties.mail;
+cursor hover does not always show ss info 
 
 
  <<<<<<<<<<<<<<<<<<    TO DO   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
  - Refactor supersite update process to automate updates
-  - 1 Refactor geojson file reads to AJAX instead of JSON embedded in .js files. e.g. areas_data.js
+  - DONE: 1 Refactor geojson file reads to AJAX instead of JSON embedded in .js files. e.g. areas_data.js
   - 2 refactor input files into GeoPackage file (SQLite)  
         and read data using Leaflet GeoPackage plugin
  - fix cursor hover
@@ -70,6 +63,11 @@ let options = {
 
 // Create Map object in #map container
 const map = L.map("map", options);
+
+// Create Pane for Supersites
+// Set z-index for Supersites above Basemap (200), Areas (400) and Precincts (400)
+map.createPane("supersites");
+map.getPane("supersites").style.zIndex = 450;
 
 ////////////////////////////////////////////////////////////////////
 ////////        ADD MAP LAYERS                 ////////////////////
@@ -219,14 +217,14 @@ const areaLayer = new L.GeoJSON.AJAX("data/areas.geojson", {
 // Create Supersite layer by reading ss_info.geojson file
 const supersiteLayer = new L.GeoJSON.AJAX("data/ss_info.geojson", {
   pointToLayer: returnSSMarker,
+  pane: "supersites",
   // style: ssStyle,
 });
 
-supersiteLayer
-  .bindTooltip(function (layer) {
-    return layer.feature.properties.Venue;
-  })
-  .addTo(map);
+// NOTE: do not automatically add Superstes to map - avoids hover bug
+supersiteLayer.bindTooltip(function (layer) {
+  return layer.feature.properties.Venue;
+});
 
 function returnSSMarker(json, latlng) {
   var att = json.properties;
@@ -240,16 +238,16 @@ function returnSSMarker(json, latlng) {
 
 ////////////////        BOULDER COUNTY LAYER   ////////////////////
 
-function countyStyle(feature) {
-  return {
-    color: "black",
-    weight: 7,
-    fillOpacity: 0.0,
-  };
-}
-const countyLayer = new L.GeoJSON.AJAX("data/County_Boundary.geojson", {
-  style: countyStyle,
-});
+// function countyStyle(feature) {
+//   return {
+//     color: "black",
+//     weight: 7,
+//     fillOpacity: 0.0,
+//   };
+// }
+// const countyLayer = new L.GeoJSON.AJAX("data/County_Boundary.geojson", {
+//   style: countyStyle,
+// });
 
 ////////////////////////////////////////////////////////////////////
 ////////        ADD UI CONTROLS                /////////////////////
